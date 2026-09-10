@@ -47,8 +47,7 @@ services:
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
       MINIO_BUCKET: book-images
-      CATALOG_SEED_ENABLED: 'true'
-      CATALOG_SECURITY_ENABLED: 'false'
+      USER_SERVICE_URL: http://host.docker.internal:8081
     depends_on:
       mongodb:
         condition: service_healthy

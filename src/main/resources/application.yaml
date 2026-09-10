@@ -15,7 +15,7 @@ catalog:
   seed:
     enabled: ${CATALOG_SEED_ENABLED:false}
   security:
-    enabled: ${CATALOG_SECURITY_ENABLED:false}
+    enabled: ${CATALOG_SECURITY_ENABLED:true}
     jwt:
       public-key-location: ${JWT_PUBLIC_KEY_LOCATION:}
       jwk-set-uri: ${JWT_JWK_SET_URI:}

@@ -42,10 +42,11 @@ public class SecurityConfig {
 
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http, Environment environment) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http, Environment environment)  {
         boolean securityEnabled = environment.getProperty("catalog.security.enabled", Boolean.class, true);
+        logger.info("catalog.security.enabled={}", securityEnabled);
         if (!securityEnabled) {
-            logger.warn("Security is disabled via catalog.security.enabled=false");
+            logger.warn("Security is disabled by configuration");
             http.csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
             return http.build();
@@ -107,7 +108,9 @@ public class SecurityConfig {
 
     private Collection<GrantedAuthority> extractAuthorities(Jwt jwt) {
         List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.addAll(extractClaim(jwt, "role", "ROLE_"));
         authorities.addAll(extractClaim(jwt, "roles", "ROLE_"));
+        authorities.addAll(extractClaim(jwt, "authorities", "ROLE_"));
         authorities.addAll(extractClaim(jwt, "scope", "SCOPE_"));
         authorities.addAll(extractClaim(jwt, "scp", "SCOPE_"));
         return authorities;
