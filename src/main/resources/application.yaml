@@ -1,0 +1,33 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: catalog-service
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/catalog_db}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${USER_SERVICE_URL:http://localhost:8081}/.well-known/jwks.json
+
+catalog:
+  security:
+    enabled: ${CATALOG_SECURITY_ENABLED:false}
+    jwt:
+      public-key-location: ${JWT_PUBLIC_KEY_LOCATION:}
+      jwk-set-uri: ${JWT_JWK_SET_URI:}
+  image:
+    max-size-bytes: ${CATALOG_IMAGE_MAX_SIZE_BYTES:1024000} # 10 MB
+    allowed-content-types:
+      - image/jpeg
+      - image/png
+      - image/webp
+
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret-key: ${MINIO_SECRET_KEY:minioadmin}
+  bucket: ${MINIO_BUCKET:book-images}
+  secure: ${MINIO_SECURE:false}

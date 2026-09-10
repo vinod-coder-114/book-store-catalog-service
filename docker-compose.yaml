@@ -1,0 +1,46 @@
+# define the service name and the image to use
+name: catalog-service
+services:
+  mongodb:
+    image: 'mongo:latest'
+    container_name: catalog-service-mongodb
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+
+  minio:
+    image: minio/minio
+    container_name: catalog-service-minio
+    ports:
+        - '9000:9000'
+        - '9002:9002'
+    environment:
+        MINIO_ROOT_USER: minioadmin
+        MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9002"
+    volumes:
+      - D:\minio-data:/data
+
+  catalog-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: catalog-service
+    ports:
+        - '8082:8082'
+    environment:
+        MONGODB_URI: mongodb://admin:admin123@mongodb:27017/catalog_db?authSource=admin
+        MINIO_ENDPOINT: http://minio:9000
+        MINIO_ACCESS_KEY: minioadmin
+        MINIO_SECRET_KEY: minioadmin
+        MINIO_BUCKET: book-images
+        CATALOG_SECURITY_ENABLED: 'false'
+    depends_on:
+        - mongodb
+        - minio
+
+volumes:
+    mongo_data:
+    minio_data:
