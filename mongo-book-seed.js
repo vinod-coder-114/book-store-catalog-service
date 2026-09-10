@@ -1,5 +1,5 @@
 // MongoDB seed script for catalog-service books collection
-// Run with: mongosh "mongodb://localhost:27017/catalog_db" ./mongo-book-seed.js
+// Run with: mongosh "mongodb://catalog_user:catalog_password@localhost:27017/catalog_db?authSource=catalog_db" ./mongo-book-seed.js
 
 use('catalog_db');
 

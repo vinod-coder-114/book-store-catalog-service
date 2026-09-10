@@ -11,8 +11,10 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +34,7 @@ public class BookService {
     public List<BookDto> getAllBooks() {
         logger.info("Fetching all books from the repository");
         List<Book> allBooks = bookRepository.findAll();
-        logger.info("Total books fetched: {}", allBooks.size());
+        logger.info("Total books fetched: {}", allBooks != null ? allBooks.size() : "No Books Found");
         Map<String, List<BookImageMetadata>> imagesByBookId = bookImageService.findImagesByBookIds(
                 allBooks.stream().map(Book::getId).collect(Collectors.toList())
         );

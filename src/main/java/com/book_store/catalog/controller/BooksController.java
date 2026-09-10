@@ -4,6 +4,7 @@ import com.book_store.catalog.dto.BookDto;
 import com.book_store.catalog.dto.BookUpsertRequest;
 import com.book_store.catalog.service.BookService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ import java.util.List;
 public class BooksController {
 
     private final BookService bookService;
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(BooksController.class);
 
     public BooksController(BookService bookService) {
         this.bookService = bookService;
@@ -37,6 +39,7 @@ public class BooksController {
 
     @GetMapping
     public ResponseEntity<List<BookDto>> getAllBooks() {
+        logger.info("Fetching all books");
         return ResponseEntity.ok(bookService.getAllBooks());
     }
 

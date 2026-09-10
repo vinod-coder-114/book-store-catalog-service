@@ -65,7 +65,13 @@ flowchart LR
 
 Set these environment variables (or place values in `application.yaml`):
 
-- `MONGODB_URI` (default: `mongodb://localhost:27017/catalog_db`)
+- `SPRING_DATA_MONGODB_URI` (recommended)
+- `SPRING_MONGODB_URI` (used by Spring Boot 4)
+- `MONGODB_URI` (fallback; default: `mongodb://admin:admin123@localhost:27017/catalog_db?authSource=admin`)
+- `CATALOG_SEED_ENABLED` (default: `true`)
+
+When running via Docker Compose, the service uses `catalog_user` on `catalog_db` created by `init-db.js`.
+If you previously used a different Mongo data directory and see auth errors, reset with `docker compose down -v` so init scripts run on a clean volume.
 - `MINIO_ENDPOINT` (default: `http://localhost:9000`)
 - `MINIO_ACCESS_KEY` (default: `minioadmin`)
 - `MINIO_SECRET_KEY` (default: `minioadmin`)
