@@ -38,12 +38,12 @@ class SecurityConfigTests {
     @Test
     @Disabled
     void shouldReturnUnauthorizedForCatalogEndpointWithoutToken() throws Exception {
-        mockMvc.perform(get("/catalog/books"))
+        mockMvc.perform(get("/api/catalog/books"))
                 .andExpect(status().isUnauthorized())
                 .andExpect(jsonPath("$.status").value(401))
                 .andExpect(jsonPath("$.error").value("Unauthorized"))
                 .andExpect(jsonPath("$.message").value("Authentication is required"))
-                .andExpect(jsonPath("$.path").value("/catalog/books"));
+                .andExpect(jsonPath("$.path").value("/api/catalog/books"));
     }
 
     @Test
@@ -52,7 +52,7 @@ class SecurityConfigTests {
         JwtRequestPostProcessor customerJwt = SecurityMockMvcRequestPostProcessors.jwt()
                 .authorities(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
 
-        mockMvc.perform(post("/catalog/books")
+        mockMvc.perform(post("/api/catalog/books")
                         .with(customerJwt)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"id\":\"bk_1\",\"title\":\"Demo\"}"))
@@ -81,7 +81,7 @@ class SecurityConfigTests {
         );
         MockMultipartFile imagePart = new MockMultipartFile("images", "cover.jpg", "image/jpeg", "hello".getBytes());
 
-        mockMvc.perform(multipart("/catalog/books")
+        mockMvc.perform(multipart("/api/catalog/books")
                         .with(adminJwt)
                         .file(bookPart)
                         .file(imagePart))

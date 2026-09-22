@@ -106,3 +106,36 @@ Run service:
 - Upload validation includes allowed content type and max file size.
 - For efficient UI rendering, the API returns image metadata with the book list so the frontend can render thumbnails immediately without a second request per book.
 
+## Internet seed (10 mixed books + MinIO images)
+
+Use `scripts/seed-mixed-books.ps1` to fetch mixed-category book data from Open Library, generate upsert-safe Mongo queries, upsert into `books`, and upload one cover image per book through catalog image APIs (which stores binary in MinIO and metadata in `book_images`).
+
+### Dry run (only fetch + generate files)
+
+```powershell
+Set-Location "C:\Users\Kiran Budupula\Downloads\practice_projects\api-gateway-impl\catalog"
+.\scripts\seed-mixed-books.ps1 -Count 10 -DryRun
+```
+
+Generated files:
+
+- `seed-data/books-mixed-10.json`
+- `seed-data/mongo-books-upsert.generated.js`
+
+### Full run (upsert Mongo + upload images to MinIO)
+
+```powershell
+Set-Location "C:\Users\Kiran Budupula\Downloads\practice_projects\api-gateway-impl\catalog"
+.\scripts\seed-mixed-books.ps1 -Count 10
+```
+
+If security is enabled for image upload endpoints, pass admin token:
+
+```powershell
+.\scripts\seed-mixed-books.ps1 -Count 10 -BearerToken "<ADMIN_JWT_TOKEN>"
+```
+
+### Load more later
+
+Increase `-Count` (for example `-Count 20`) and rerun. Existing books are updated via Mongo `bulkWrite` upsert; image upload is skipped when a book already has images.
+

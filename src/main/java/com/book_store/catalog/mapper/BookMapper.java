@@ -217,7 +217,7 @@ public class BookMapper {
     }
 
     private String imageDownloadUrl(String bookId, String imageId) {
-        return "/catalog/books/%s/images/%s".formatted(bookId, imageId);
+        return "/api/catalog/books/%s/images/%s".formatted(bookId, imageId);
     }
 }
 

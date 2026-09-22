@@ -41,7 +41,7 @@ class SecurityConfigDisabledTests {
         dto.setTitle("Demo");
         when(bookService.getAllBooks()).thenReturn(List.of(dto));
 
-        mockMvc.perform(get("/catalog/books"))
+        mockMvc.perform(get("/api/catalog/books"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value("bk_1"))
                 .andExpect(jsonPath("$[0].title").value("Demo"));
@@ -61,7 +61,7 @@ class SecurityConfigDisabledTests {
                 "{\"title\":\"Demo\",\"author\":\"Author\",\"genre\":\"Fiction\",\"format\":\"Paperback\",\"pricing\":{\"currency\":\"INR\",\"salePrice\":100,\"listPrice\":120},\"rating\":{\"average\":4.8,\"count\":12}}".getBytes()
         );
 
-        mockMvc.perform(multipart("/catalog/books")
+        mockMvc.perform(multipart("/api/catalog/books")
                         .file(bookPart))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value("bk_1"))

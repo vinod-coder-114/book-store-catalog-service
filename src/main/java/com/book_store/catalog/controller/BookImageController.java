@@ -21,7 +21,7 @@ import java.time.Duration;
 import java.util.List;
 
 @RestController
-@RequestMapping("/catalog/books/{bookId}/images")
+@RequestMapping("/api/catalog/books/{bookId}/images")
 public class BookImageController {
 
     private final BookImageService bookImageService;

@@ -18,6 +18,8 @@ services:
     volumes:
       - mongo_data:/data/db
       - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    networks:
+        - bookstore-net
   minio:
     image: minio/minio
     container_name: catalog-service-minio
@@ -31,6 +33,8 @@ services:
     volumes:
       #      - D:\minio-data:/data
       - D:/docker-data/minio-data:/data
+    networks:
+        - bookstore-net
   catalog-service:
     build:
       context: .
@@ -47,7 +51,9 @@ services:
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
       MINIO_BUCKET: book-images
-      USER_SERVICE_URL: http://host.docker.internal:8081
+      USER_SERVICE_URL: http://user-service:8081
+    networks:
+        - bookstore-net
     depends_on:
       mongodb:
         condition: service_healthy
@@ -57,3 +63,8 @@ services:
 volumes:
   mongo_data:
   minio_data:
+
+networks:
+    bookstore-net:
+        external: true
+        name: user-service_bookstore-net

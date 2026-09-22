@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/catalog/books")
+@RequestMapping("/api/catalog/books")
 public class BooksController {
 
     private final BookService bookService;
