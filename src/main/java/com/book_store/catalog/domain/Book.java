@@ -27,6 +27,7 @@ public class Book {
     private BookRating rating;
 
     private BookImages images;
+    private Long stock;
 }
 
 

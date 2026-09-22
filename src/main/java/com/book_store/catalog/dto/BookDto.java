@@ -17,6 +17,7 @@ public class BookDto {
     private Pricing pricing;
     private Rating rating;
     private List<BookImageDto> images;
+    private Long stock;
 
     @Data
     public static class Pricing {

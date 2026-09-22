@@ -70,18 +70,12 @@ class BookMapperTests {
         assertEquals(1, mappedDto.getImages().size());
         BookImageDto image = mappedDto.getImages().getFirst();
         assertEquals("img_1", image.id());
-        assertEquals("/catalog/books/bk_10293/images/img_1", image.downloadUrl());
+        assertEquals("/book-store/api/catalog/books/bk_10293/images/img_1", image.downloadUrl());
         assertEquals("cover.jpg", image.fileName());
         assertEquals("image/jpeg", image.contentType());
         assertEquals(1024, image.sizeBytes());
         assertEquals(0, image.displayOrder());
         assertTrue(image.primary());
-    }
-
-    @Test
-    void shouldReturnNullForNullInput() {
-        assertNull(mapper.toEntity((BookDto) null));
-        assertNull(mapper.toDto(null));
     }
 
     @Test

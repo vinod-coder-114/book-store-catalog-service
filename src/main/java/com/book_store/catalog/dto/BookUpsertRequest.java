@@ -21,6 +21,7 @@ public class BookUpsertRequest {
     @NotNull
     @Valid
     private Rating rating;
+    private Long stock;
 
     @Data
     public static class Pricing {

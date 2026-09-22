@@ -47,17 +47,8 @@ public class BookService {
         return bookMapper.toDto(book, bookImageService.listImages(bookId));
     }
 
-    public BookDto createBook(BookDto bookDto) {
-        Book saved = bookRepository.save(bookMapper.toEntity(bookDto));
-        return bookMapper.toDto(saved, List.of());
-    }
-
     public BookDto createBook(BookUpsertRequest request, List<MultipartFile> images) {
         return createBook(bookMapper.toEntity(request), images);
-    }
-
-    public BookDto updateBook(String bookId, BookDto bookDto) {
-        return updateBook(bookId, bookMapper.toEntity(bookDto));
     }
 
     public BookDto updateBook(String bookId, BookUpsertRequest request) {

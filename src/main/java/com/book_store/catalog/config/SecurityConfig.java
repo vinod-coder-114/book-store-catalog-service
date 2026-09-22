@@ -60,6 +60,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/catalog/books/*/images/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/catalog/books/*/images/*").hasRole("ADMIN")
                         .requestMatchers("/catalog/**").authenticated()
+                        .requestMatchers("/book-store/api/catalog/books/*/images/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .exceptionHandling(ex -> ex

@@ -4,6 +4,7 @@ import com.book_store.catalog.dto.BookImageDto;
 import com.book_store.catalog.domain.BookImageMetadata;
 import com.book_store.catalog.service.BookImageService;
 import com.book_store.catalog.service.ImageObject;
+import jdk.jfr.ContentType;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

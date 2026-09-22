@@ -57,7 +57,7 @@ class BookServiceTests {
         assertThat(response.getId()).isEqualTo("bk_1");
         assertThat(response.getTitle()).isEqualTo("Atomic Habits");
         assertThat(response.getImages()).hasSize(1);
-        assertThat(response.getImages().getFirst().downloadUrl()).isEqualTo("/catalog/books/bk_1/images/img_1");
+        assertThat(response.getImages().getFirst().downloadUrl()).isEqualTo("/book-store/api/catalog/books/bk_1/images/img_1");
     }
 
     @Test

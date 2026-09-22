@@ -37,22 +37,16 @@ public class BookMapper {
         dto.setFormat(entity.getFormat());
         dto.setPricing(toDtoPricing(entity.getPricing()));
         dto.setRating(toDtoRating(entity.getRating()));
+        dto.setStock(entity.getStock());
         dto.setImages(toDtoImages(entity.getId(), imageMetadata, entity.getImages()));
         return dto;
-    }
-
-    public Book toEntity(BookDto dto) {
-        if (dto == null) {
-            return null;
-        }
-        return toEntity(dto.getId(), dto.getTitle(), dto.getAuthor(), dto.getGenre(), dto.getFormat(), dto.getPricing(), dto.getRating());
     }
 
     public Book toEntity(BookUpsertRequest request) {
         if (request == null) {
             return null;
         }
-        return toEntity(null, request.getTitle(), request.getAuthor(), request.getGenre(), request.getFormat(), request.getPricing(), request.getRating());
+        return toEntity(null, request.getTitle(), request.getAuthor(), request.getGenre(), request.getFormat(), request.getPricing(), request.getRating(), request.getStock());
     }
 
     public List<BookDto> toDtoList(List<Book> entities) {
@@ -70,12 +64,6 @@ public class BookMapper {
                 .toList();
     }
 
-    public List<Book> toEntityList(List<BookDto> dtos) {
-        if (dtos == null || dtos.isEmpty()) {
-            return Collections.emptyList();
-        }
-        return dtos.stream().map(this::toEntity).toList();
-    }
 
     private Book toEntity(String id, String title, String author, String genre, String format, BookDto.Pricing pricing, BookDto.Rating rating) {
         Book entity = new Book();
@@ -90,7 +78,7 @@ public class BookMapper {
         return entity;
     }
 
-    private Book toEntity(String id, String title, String author, String genre, String format, BookUpsertRequest.Pricing pricing, BookUpsertRequest.Rating rating) {
+    private Book toEntity(String id, String title, String author, String genre, String format, BookUpsertRequest.Pricing pricing, BookUpsertRequest.Rating rating, Long stock) {
         Book entity = new Book();
         entity.setId(id);
         entity.setTitle(title);
@@ -100,6 +88,7 @@ public class BookMapper {
         entity.setPricing(toEntityPricing(pricing));
         entity.setRating(toEntityRating(rating));
         entity.setImages(null);
+        entity.setStock(stock);
         return entity;
     }
 
@@ -217,7 +206,7 @@ public class BookMapper {
     }
 
     private String imageDownloadUrl(String bookId, String imageId) {
-        return "/api/catalog/books/%s/images/%s".formatted(bookId, imageId);
+        return "/book-store/api/catalog/books/%s/images/%s".formatted(bookId, imageId);
     }
 }
 
