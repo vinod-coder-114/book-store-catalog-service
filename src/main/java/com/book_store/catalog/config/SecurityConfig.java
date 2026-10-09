@@ -134,6 +134,7 @@ public class SecurityConfig {
 
         return values.stream()
                 .filter(v -> !v.isBlank())
+                .map(v -> prefix.equals("ROLE_") ? v.toUpperCase() : v)
                 .map(v -> v.startsWith(prefix) ? v : prefix + v)
                 .map(SimpleGrantedAuthority::new)
                 .map(GrantedAuthority.class::cast)
