@@ -27,10 +27,8 @@ public class BookUpsertRequest {
     public static class Pricing {
         @NotBlank
         private String currency;
-        @NotNull
-        private Integer salePrice;
-        @NotNull
-        private Integer listPrice;
+        private @NotNull Double salePrice;
+        private @NotNull Double listPrice;
     }
 
     @Data
