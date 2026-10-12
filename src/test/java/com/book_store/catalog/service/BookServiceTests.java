@@ -67,8 +67,8 @@ class BookServiceTests {
         book.setTitle("Atomic Habits");
         BookPricing pricing = new BookPricing();
         pricing.setCurrency("INR");
-        pricing.setSalePrice(100);
-        pricing.setListPrice(120);
+        pricing.setSalePrice(100.87);
+        pricing.setListPrice(120.99);
         book.setPricing(pricing);
         BookRating rating = new BookRating();
         rating.setAverage(4.8);
@@ -94,8 +94,8 @@ class BookServiceTests {
 
         BookUpsertRequest.Pricing pricing = new BookUpsertRequest.Pricing();
         pricing.setCurrency("INR");
-        pricing.setSalePrice(399);
-        pricing.setListPrice(499);
+        pricing.setSalePrice(399.0);
+        pricing.setListPrice(499.0);
         request.setPricing(pricing);
 
         BookUpsertRequest.Rating rating = new BookUpsertRequest.Rating();

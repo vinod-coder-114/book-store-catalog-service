@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BookPricing {
     private String currency = "INR";
-    private Integer salePrice;
-    private Integer listPrice;
+    private Double salePrice;
+    private Double listPrice;
 }
 

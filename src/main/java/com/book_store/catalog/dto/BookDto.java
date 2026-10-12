@@ -22,8 +22,8 @@ public class BookDto {
     @Data
     public static class Pricing {
         private String currency;
-        private Integer salePrice;
-        private Integer listPrice;
+        private Double salePrice;
+        private Double listPrice;
     }
 
     @Data

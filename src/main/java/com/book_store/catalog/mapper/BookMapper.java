@@ -109,8 +109,8 @@ public class BookMapper {
         }
         BookPricing entityPricing = new BookPricing();
         entityPricing.setCurrency(pricing.getCurrency());
-        entityPricing.setSalePrice(pricing.getSalePrice());
-        entityPricing.setListPrice(pricing.getListPrice());
+        entityPricing.setSalePrice(roundToTwoDecimalPlaces(pricing.getSalePrice()));
+        entityPricing.setListPrice(roundToTwoDecimalPlaces(pricing.getListPrice()));
         return entityPricing;
     }
 
@@ -120,9 +120,16 @@ public class BookMapper {
         }
         BookPricing entityPricing = new BookPricing();
         entityPricing.setCurrency(pricing.getCurrency());
-        entityPricing.setSalePrice(pricing.getSalePrice());
-        entityPricing.setListPrice(pricing.getListPrice());
+        entityPricing.setSalePrice(roundToTwoDecimalPlaces(pricing.getSalePrice()));
+        entityPricing.setListPrice(roundToTwoDecimalPlaces(pricing.getListPrice()));
         return entityPricing;
+    }
+
+    private Double roundToTwoDecimalPlaces(Double value) {
+        if (value == null) {
+            return null;
+        }
+        return Math.round(value * 100.0) / 100.0;
     }
 
     private BookDto.Rating toDtoRating(BookRating rating) {

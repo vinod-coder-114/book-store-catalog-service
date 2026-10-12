@@ -35,11 +35,11 @@ public class BookDataInitializer implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         if (bookRepository.count() == 0) {
             List<Book> seedBooks = List.of(
-                    createBook("bk_10293", "Atomic Habits", "James Clear", "Self Help", "Paperback", 399, 499, 4.7, 12933),
-                    createBook("bk_10411", "Deep Work", "Cal Newport", "Productivity", "Hardcover", 549, 699, 4.6, 8451),
-                    createBook("bk_10754", "The Psychology of Money", "Morgan Housel", "Finance", "Paperback", 379, 450, 4.8, 21445),
-                    createBook("bk_10902", "Clean Code", "Robert C. Martin", "Programming", "Paperback", 699, 899, 4.5, 17602),
-                    createBook("bk_11037", "Ikigai", "Hector Garcia", "Wellness", "Paperback", 299, 399, 4.4, 9820)
+                    createBook("bk_10293", "Atomic Habits", "James Clear", "Self Help", "Paperback", 399.0, 499.0, 4.7, 12933),
+                    createBook("bk_10411", "Deep Work", "Cal Newport", "Productivity", "Hardcover", 549.0, 699.0, 4.6, 8451),
+                    createBook("bk_10754", "The Psychology of Money", "Morgan Housel", "Finance", "Paperback", 379.0, 450.0, 4.8, 21445),
+                    createBook("bk_10902", "Clean Code", "Robert C. Martin", "Programming", "Paperback", 699.0, 899.0, 4.5, 17602),
+                    createBook("bk_11037", "Ikigai", "Hector Garcia", "Wellness", "Paperback", 299.0, 399.0, 4.4, 9820)
             );
 
             bookRepository.saveAll(seedBooks);
@@ -66,7 +66,7 @@ public class BookDataInitializer implements ApplicationRunner {
     }
 
     private Book createBook(String id, String title, String author, String genre, String format,
-                           int salePrice, int listPrice, double averageRating, int reviewCount) {
+                           double salePrice, double listPrice, double averageRating, int reviewCount) {
         Book book = new Book();
         book.setId(id);
         book.setTitle(title);

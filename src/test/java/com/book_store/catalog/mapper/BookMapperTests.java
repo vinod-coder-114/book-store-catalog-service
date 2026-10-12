@@ -107,8 +107,8 @@ class BookMapperTests {
 
         BookUpsertRequest.Pricing pricing = new BookUpsertRequest.Pricing();
         pricing.setCurrency("INR");
-        pricing.setSalePrice(399);
-        pricing.setListPrice(499);
+        pricing.setSalePrice(399.00);
+        pricing.setListPrice(499.00);
         request.setPricing(pricing);
 
         BookUpsertRequest.Rating rating = new BookUpsertRequest.Rating();
